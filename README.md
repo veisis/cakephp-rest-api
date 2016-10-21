@@ -30,3 +30,9 @@ Or, you can load the plugin using the shell command
 ```sh
 $ bin/cake plugin load -b RestApi
 ```
+## Usage
+
+comming soon...
+
+## Reporting Issues
+If you have a problem with this plugin or any bug, please open an issue on [GitHub](https://github.com/multidots/cakephp-rest-api/issues).
