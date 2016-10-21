@@ -2,11 +2,11 @@
 
 namespace RestApi\Error;
 
-use RestApi\Controller\ApiErrorController;
 use Cake\Core\Configure;
 use Cake\Error\ExceptionRenderer;
 use Cake\Network\Response;
 use Exception;
+use RestApi\Controller\ApiErrorController;
 
 /**
  * API Exception Renderer.
