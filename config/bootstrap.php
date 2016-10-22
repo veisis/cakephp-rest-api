@@ -13,3 +13,12 @@ Configure::write('Error.exceptionRenderer', 'RestApi\Error\AppExceptionRenderer'
 
 // Register listner
 EventManager::instance()->on(new ApiRequestHandler());
+
+/*
+ * Read configuration file and inject configuration
+ */
+try {
+    Configure::load('api', 'default', false);
+} catch (\Exception $e) {
+    Configure::load('RestApi.api', 'default', false);
+}
