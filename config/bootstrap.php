@@ -5,9 +5,12 @@
  */
 
 use Cake\Core\Configure;
+use Cake\Event\EventManager;
+use RestApi\Middleware\RestApiMiddleware;
 
-// Set custom exception renderer
-Configure::write('Error.exceptionRenderer', 'RestApi\Error\ApiExceptionRenderer');
+EventManager::instance()->on('Server.buildMiddleware', function ($event, $middleware) {
+    $middleware->add(new RestApiMiddleware());
+});
 
 /*
  * Read configuration file and inject configuration
