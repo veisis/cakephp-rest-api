@@ -5,22 +5,12 @@ namespace RestApi\Controller;
 use Cake\Event\Event;
 
 /**
- * Static content controller
+ * Api error controller
  *
- * This controller will render errors
+ * This controller will sets configuration to render errors
  */
 class ApiErrorController extends AppController
 {
-
-    /**
-     * Initialization hook method.
-     *
-     * @return void
-     */
-    public function initialize()
-    {
-        $this->loadComponent('RequestHandler');
-    }
 
     /**
      * beforeRender callback.
