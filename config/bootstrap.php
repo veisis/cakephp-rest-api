@@ -5,7 +5,6 @@
  */
 
 use Cake\Core\Configure;
-use Cake\Event\EventManager;
 
 // Set custom exception renderer
 Configure::write('Error.exceptionRenderer', 'RestApi\Error\AppExceptionRenderer');
@@ -16,6 +15,6 @@ Configure::write('Error.exceptionRenderer', 'RestApi\Error\AppExceptionRenderer'
 try {
     Configure::load('RestApi.api', 'default', false);
     Configure::load('api', 'default', true);
-} catch (\Exception $e) {
+} catch (Exception $e) {
 
 }
