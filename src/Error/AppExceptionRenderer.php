@@ -27,42 +27,6 @@ class AppExceptionRenderer extends ExceptionRenderer
     }
 
     /**
-     * Handles MissingTokenException.
-     *
-     * @param MissingTokenException $exception MissingTokenException
-     *
-     * @return type
-     */
-    public function missingToken($exception)
-    {
-        return $this->__prepareResponse($exception);
-    }
-
-    /**
-     * Handles InvalidTokenFormatException.
-     *
-     * @param InvalidTokenFormatException $exception InvalidTokenFormatException
-     *
-     * @return Response
-     */
-    public function invalidTokenFormat($exception)
-    {
-        return $this->__prepareResponse($exception);
-    }
-
-    /**
-     * Handles InvalidTokenException.
-     *
-     * @param InvalidTokenException $exception InvalidTokenException
-     *
-     * @return Response
-     */
-    public function invalidToken($exception)
-    {
-        return $this->__prepareResponse($exception);
-    }
-
-    /**
      * Prepare response.
      *
      * @param Exception $exception Exception
