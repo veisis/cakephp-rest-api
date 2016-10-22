@@ -13,7 +13,7 @@ use RestApi\Controller\ApiErrorController;
  *
  * Captures and handles all unhandled exceptions. Displays valid json response.
  */
-class AppExceptionRenderer extends ExceptionRenderer
+class ApiExceptionRenderer extends ExceptionRenderer
 {
 
     /**

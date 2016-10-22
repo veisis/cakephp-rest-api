@@ -7,7 +7,7 @@
 use Cake\Core\Configure;
 
 // Set custom exception renderer
-Configure::write('Error.exceptionRenderer', 'RestApi\Error\AppExceptionRenderer');
+Configure::write('Error.exceptionRenderer', 'RestApi\Error\ApiExceptionRenderer');
 
 /*
  * Read configuration file and inject configuration
