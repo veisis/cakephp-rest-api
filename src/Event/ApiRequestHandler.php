@@ -2,6 +2,7 @@
 
 namespace RestApi\Event;
 
+use Cake\Core\Configure;
 use Cake\Event\Event;
 use Cake\Event\EventListenerInterface;
 
@@ -93,13 +94,16 @@ class ApiRequestHandler implements EventListenerInterface
         $request = $event->data['request'];
         $response = $event->data['response'];
         $response->type('json');
-        $response->cors($request)
-            ->allowOrigin('*')
-            ->allowMethods(['GET', 'POST', 'OPTIONS'])
-            ->allowHeaders(['Content-Type, Authorization, Accept, Origin'])
-            ->allowCredentials()
-            ->maxAge(2628000)
-            ->build();
+
+        if (Configure::read('ApiRequest.cors.enabled')) {
+            $response->cors($request)
+                ->allowOrigin(Configure::read('ApiRequest.cors.origin'))
+                ->allowMethods(['GET', 'POST', 'OPTIONS'])
+                ->allowHeaders(['Content-Type, Authorization, Accept, Origin'])
+                ->allowCredentials()
+                ->maxAge(2628000)
+                ->build();
+        }
 
         return true;
     }

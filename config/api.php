@@ -4,7 +4,7 @@ return [
     'ApiRequest' => [
         'cors' => [
             'enabled' => true,
-            'domain' => '*'
+            'origin' => '*'
         ]
     ]
 ];
