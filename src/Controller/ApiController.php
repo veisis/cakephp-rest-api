@@ -4,6 +4,11 @@ namespace RestApi\Controller;
 
 use Cake\Event\Event;
 
+/**
+ * Api Controller
+ *
+ * Provides basic functionality for building REST APIs
+ */
 class ApiController extends AppController
 {
 
