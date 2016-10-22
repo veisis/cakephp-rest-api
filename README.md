@@ -24,7 +24,7 @@ composer require multidots/cakephp-rest-api
 After installation, [Load the plugin](http://book.cakephp.org/3.0/en/plugins.html#loading-a-plugin)
 
 ```php
-Plugin::load('MailgunEmail', ['bootstrap' => true]);
+Plugin::load('RestApi', ['bootstrap' => true]);
 ```
 Or, you can load the plugin using the shell command
 ```sh
