@@ -2,7 +2,9 @@
 
 return [
     'ApiRequest' => [
-        'log' => false,
-        'cors' => false
+        'cors' => [
+            'enabled' => true,
+            'domain' => '*'
+        ]
     ]
 ];
