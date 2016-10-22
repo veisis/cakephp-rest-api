@@ -47,6 +47,12 @@ class AppController extends Controller
         $this->_buildResponse();
     }
 
+    /**
+     * beforeFilter callback
+     *
+     * @param Event $event An Event instance
+     * @return type
+     */
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
@@ -58,6 +64,11 @@ class AppController extends Controller
         }
     }
 
+    /**
+     * afterFilter callback
+     *
+     * @param Event $event An Event instance
+     */
     public function afterFilter(Event $event)
     {
         // TODO: log request
@@ -67,9 +78,7 @@ class AppController extends Controller
     /**
      * Prepares the response object with content type and cors headers.
      *
-     * @param Event $event The event object either beforeDispatch or afterDispatch
-     *
-     * @return bool true
+     * @return void
      */
     private function _buildResponse()
     {
@@ -84,7 +93,5 @@ class AppController extends Controller
                 ->maxAge(2628000)
                 ->build();
         }
-
-        return true;
     }
 }
