@@ -210,5 +210,46 @@ The response will look like,
 {"status":"NOK","result":{"message":"Method Not Allowed"}}
 ```
 
+Another example of throwing an exception,
+
+```php
+<?php
+
+namespace App\Controller;
+
+use Cake\Network\Exception\NotFoundException;
+use RestApi\Controller\ApiController;
+
+/**
+ * Foo Controller
+ *
+ */
+class FooController extends ApiController
+{
+
+    /**
+     * error method
+     *
+     */
+    public function error()
+    {
+        $throwException = true;
+
+        if ($throwException) {
+            throw new NotFoundException();
+        }
+
+        // your other logic will be here
+        // and finally set your response
+        // $this->apiResponse['you_response'] = 'your response data';
+    }
+}
+```
+
+And the response will be,
+
+```json
+{"status":"NOK","result":{"message":"Not Found"}}
+```
 ## Reporting Issues
 If you have a problem with this plugin or any bug, please open an issue on [GitHub](https://github.com/multidots/cakephp-rest-api/issues).
