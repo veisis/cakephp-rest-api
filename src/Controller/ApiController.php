@@ -20,24 +20,8 @@ class ApiController extends AppController
      */
     public function beforeRender(Event $event)
     {
-        parent::beforeRender($event);
-
         $this->viewBuilder()->className('RestApi.Api');
 
-        $this->response->statusCode($this->httpStatusCode);
-
-        if (200 != $this->httpStatusCode) {
-            $this->responseStatus = "NOK";
-        }
-
-        $response = [
-            'status' => $this->responseStatus
-        ];
-
-        if (!empty($this->apiResponse)) {
-            $response['result'] = $this->apiResponse;
-        }
-
-        $this->set('response', $response);
+        parent::beforeRender($event);
     }
 }

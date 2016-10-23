@@ -1,9 +1,5 @@
 <?php
 
-/*
- * bootstrap
- */
-
 use Cake\Core\Configure;
 use Cake\Event\EventManager;
 use RestApi\Middleware\RestApiMiddleware;
