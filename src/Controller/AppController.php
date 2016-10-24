@@ -35,6 +35,20 @@ class AppController extends Controller
     public $apiResponse = [];
 
     /**
+     * payload value from JWT token
+     *
+     * @var mixed
+     */
+    public $jwtPayload = null;
+
+    /**
+     * JWT token for current request
+     *
+     * @var string
+     */
+    public $jwtToken = "";
+
+    /**
      * Initialization hook method.
      *
      * @return void
@@ -44,6 +58,7 @@ class AppController extends Controller
         parent::initialize();
 
         $this->loadComponent('RequestHandler');
+        $this->loadComponent('RestApi.AccessControl');
         $this->_buildResponse();
     }
 
