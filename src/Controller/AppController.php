@@ -114,10 +114,10 @@ class AppController extends Controller
         if (Configure::read('ApiRequest.cors.enabled')) {
             $this->response->cors($this->request)
                 ->allowOrigin(Configure::read('ApiRequest.cors.origin'))
-                ->allowMethods(['GET', 'POST', 'OPTIONS'])
-                ->allowHeaders(['Content-Type, Authorization, Accept, Origin'])
+                ->allowMethods(Configure::read('ApiRequest.cors.allowedMethods'))
+                ->allowHeaders(Configure::read('ApiRequest.cors.allowedHeaders'))
                 ->allowCredentials()
-                ->maxAge(2628000)
+                ->maxAge(Configure::read('ApiRequest.cors.maxAge'))
                 ->build();
         }
     }
