@@ -1,4 +1,3 @@
-
 # RestApi plugin for CakePHP 3
 
 [![Build Status](https://travis-ci.org/multidots/cakephp-rest-api.svg?branch=master)](https://travis-ci.org/multidots/cakephp-rest-api)
@@ -77,9 +76,91 @@ The URL for above example will be `http://yourdomain.com/foo/bar`. You can custo
 Simple :)
 
 ## Configurations
+This plugin provides several configuration related to `CORS` and `JWT` authentication. The default configurations are as below and defined in `RestApi/config/api.php`.
+
+```php
+<?php
+
+return [
+    'ApiRequest' => [
+        'jwtAuth' => [
+            'enabled' => true,
+            'cypherKey' => 'R1a#2%dY2fX@3g8r5&s4Kf6*sd(5dHs!5gD4s',
+            'tokenAlgorithm' => 'HS256'
+        ],
+        'cors' => [
+            'enabled' => true,
+            'origin' => '*',
+            'allowedMethods' => ['GET', 'POST', 'OPTIONS'],
+            'allowedHeaders' => ['Content-Type, Authorization, Accept, Origin'],
+            'maxAge' => 2628000
+        ]
+    ]
+];
+```
+
+### Request authentication using JWT
+
+You can check for presence of auth token in API request. By default it is enabled. You need to define a flag `allowWithoutToken` to `true` or `false`. For example,
+
+```php
+$routes->connect('/demo/foo', ['controller' => 'Demo', 'action' => 'foo', 'allowWithoutToken' => false]);
+```
+Above API method will require auth token in request. You can pass the auth token in either header, in GET parameter or in POST field.
+
+If you want to pass token in header, use below format.
+
+```php
+Authorization: Bearer [token]
+```
+
+In case of GET or POST parameter, pass the token in `token` parameter.
+
+#### Generate jwt token
+This plugin provides Utility class to generate jwt token and sign with same key and algorithm. Use `JwtToken::generate()` method wherever required. Most probably, you will need this in user login and register API. See below example,
+
+```php
+<?php
+
+namespace App\Controller;
+
+use RestApi\Controller\ApiController;
+use RestApi\Utility\JwtToken;
+
+/**
+ * Account Controller
+ *
+ */
+class AccountController extends ApiController
+{
+
+    /**
+     * Login method
+     *
+     * Returns a token on successful authentication
+     *
+     * @return void|\Cake\Network\Response
+     */
+    public function login()
+    {
+        $this->request->allowMethod('post');
+
+        /**
+         * process your data and validate it against database table
+         */
+        
+		// generate token if valid user
+		$payload = ['email' => $user->email, 'name' => $user->name];
+
+        $this->apiResponse['token'] = JwtToken::generateToken($payload);
+        $this->apiResponse['message'] = 'Logged in successfully.'; 
+    }
+}
+```
+
 
 ### cors
-As of now, this plugin provides configuration for CORS requests. By default, cors requests are enabled and allowed from all domains. You can overwrite these settings by creating config file at `APP/config/api.php` . The content of file will look like,
+By default, cors requests are enabled and allowed from all domains. You can overwrite these settings by creating config file at `APP/config/api.php` . The content of file will look like,
 
 ```php
 <?php
@@ -87,7 +168,10 @@ return [
     'ApiRequest' => [
         'cors' => [
             'enabled' => true,
-            'origin' => '*'
+            'origin' => '*',
+            'allowedMethods' => ['GET', 'POST', 'OPTIONS'],
+            'allowedHeaders' => ['Content-Type, Authorization, Accept, Origin'],
+            'maxAge' => 2628000
         ]
     ]
 ];
@@ -101,7 +185,10 @@ return [
     'ApiRequest' => [
         'cors' => [
             'enabled' => true,
-            'origin' => ['localhost', 'www.example.com', '*.example.com']
+            'origin' => ['localhost', 'www.example.com', '*.example.com'],
+            'allowedMethods' => ['GET', 'POST', 'OPTIONS'],
+            'allowedHeaders' => ['Content-Type, Authorization, Accept, Origin'],
+            'maxAge' => 2628000
         ]
     ]
 ];
