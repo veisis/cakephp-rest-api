@@ -2,7 +2,7 @@
 
 if (empty($response['result'])) {
     $response['result'] = [
-        'error' => 'Unknown request!'
+        'message' => 'Empty response!'
     ];
 }
 
