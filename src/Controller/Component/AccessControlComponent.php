@@ -86,6 +86,8 @@ class AccessControlComponent extends Component
 
         $controller->jwtToken = $token;
 
+        Configure::write('accessToken', $token);
+
         return true;
     }
 }

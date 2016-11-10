@@ -2,6 +2,7 @@
 
 namespace RestApi\Error;
 
+use Cake\Core\Configure;
 use Cake\Error\ExceptionRenderer;
 use Cake\Network\Response;
 use Exception;
@@ -77,6 +78,8 @@ class ApiExceptionRenderer extends ExceptionRenderer
         $response = $this->_getController()->response;
         $code = $this->_code($exception);
         $response->statusCode($this->_code($exception));
+
+        Configure::write('apiExceptionMessage', $exception->getMessage());
 
         $body = [
             'status' => !empty($options['responseStatus']) ? $options['responseStatus'] : 'NOK',

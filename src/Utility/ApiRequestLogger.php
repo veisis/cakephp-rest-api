@@ -21,28 +21,24 @@ class ApiRequestLogger
      */
     public static function log(Request $request, Response $response)
     {
-        if (!Configure::read('ApiRequest.log')) {
-            return;
-        }
-
         Configure::write('requestLogged', true);
 
         try {
-            $apiRequests = TableRegistry::get('ApiRequests');
+            $apiRequests = TableRegistry::get('RestApi.ApiRequests');
             $entityData = [
                 'http_method' => $request->method(),
                 'endpoint' => $request->here(),
-                'user_id' => Configure::read('currentUserId'),
                 'token' => Configure::read('accessToken'),
                 'ip_address' => $request->clientIp(),
                 'request_data' => json_encode($request->data),
                 'response_code' => $response->statusCode(),
                 'response_data' => $response->body(),
-                'exception' => Configure::read('exceptionMessage'),
+                'exception' => Configure::read('apiExceptionMessage'),
             ];
             $entity = $apiRequests->newEntity($entityData);
             $apiRequests->save($entity);
         } catch (\Exception $e) {
+            \Cake\Log\Log::debug($e->getMessage());
             return;
         }
     }

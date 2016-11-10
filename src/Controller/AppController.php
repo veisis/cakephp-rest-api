@@ -3,7 +3,6 @@
 namespace RestApi\Controller;
 
 use Cake\Controller\Controller;
-use Cake\Core\Configure;
 use Cake\Event\Event;
 
 /**
@@ -59,35 +58,6 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('RestApi.AccessControl');
-        $this->_buildResponse();
-    }
-
-    /**
-     * beforeFilter callback
-     *
-     * @param Event $event An Event instance
-     * @return type
-     */
-    public function beforeFilter(Event $event)
-    {
-        parent::beforeFilter($event);
-
-        if ('OPTIONS' === $this->request->method()) {
-            $this->response->statusCode(200);
-
-            return $this->response;
-        }
-    }
-
-    /**
-     * afterFilter callback
-     *
-     * @param Event $event An Event instance
-     */
-    public function afterFilter(Event $event)
-    {
-        // TODO: log request
-        parent::afterFilter($event);
     }
 
     /**
@@ -115,25 +85,5 @@ class AppController extends Controller
         }
 
         $this->set('response', $response);
-    }
-
-    /**
-     * Prepares the response object with content type and cors headers.
-     *
-     * @return void
-     */
-    private function _buildResponse()
-    {
-        $this->response->type('json');
-
-        if (Configure::read('ApiRequest.cors.enabled')) {
-            $this->response->cors($this->request)
-                ->allowOrigin(Configure::read('ApiRequest.cors.origin'))
-                ->allowMethods(Configure::read('ApiRequest.cors.allowedMethods'))
-                ->allowHeaders(Configure::read('ApiRequest.cors.allowedHeaders'))
-                ->allowCredentials()
-                ->maxAge(Configure::read('ApiRequest.cors.maxAge'))
-                ->build();
-        }
     }
 }
