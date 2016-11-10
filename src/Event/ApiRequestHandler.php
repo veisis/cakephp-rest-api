@@ -46,6 +46,7 @@ class ApiRequestHandler implements EventListenerInterface
     public function beforeDispatch(Event $event)
     {
         $this->buildResponse($event);
+        Configure::write('requestLogged', false);
         $request = $event->data['request'];
         if ('OPTIONS' === $request->method()) {
             $event->stopPropagation();
@@ -82,7 +83,7 @@ class ApiRequestHandler implements EventListenerInterface
             return;
         }
 
-        if (Configure::read('ApiRequest.log')) {
+        if (!Configure::read('requestLogged') && Configure::read('ApiRequest.log')) {
             ApiRequestLogger::log($request, $event->subject()->response);
         }
     }
