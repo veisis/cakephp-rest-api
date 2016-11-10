@@ -2,10 +2,10 @@
 
 namespace RestApi\Event;
 
-use RestApi\Utility\ApiRequestLogger;
 use Cake\Core\Configure;
 use Cake\Event\Event;
 use Cake\Event\EventListenerInterface;
+use RestApi\Utility\ApiRequestLogger;
 
 /**
  * Event listner for API requests.

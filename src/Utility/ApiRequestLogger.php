@@ -38,7 +38,6 @@ class ApiRequestLogger
             $entity = $apiRequests->newEntity($entityData);
             $apiRequests->save($entity);
         } catch (\Exception $e) {
-            \Cake\Log\Log::debug($e->getMessage());
             return;
         }
     }
