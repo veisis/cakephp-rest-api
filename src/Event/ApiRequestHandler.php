@@ -81,8 +81,7 @@ class ApiRequestHandler implements EventListenerInterface
         if ('OPTIONS' === $request->method()) {
             return;
         }
-        \Cake\Log\Log::debug(Configure::read('ApiRequest.log'));
-        \Cake\Log\Log::debug(Configure::read('requestLogged'));
+
         if (Configure::read('ApiRequest.log')) {
             ApiRequestLogger::log($request, $event->subject()->response);
         }
