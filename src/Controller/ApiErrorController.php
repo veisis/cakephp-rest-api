@@ -16,7 +16,7 @@ class ApiErrorController extends AppController
      * beforeRender callback.
      *
      * @param Event $event Event.
-     * @return void
+     * @return null
      */
     public function beforeRender(Event $event)
     {
@@ -29,5 +29,7 @@ class ApiErrorController extends AppController
         parent::beforeRender($event);
 
         $this->viewBuilder()->className('RestApi.ApiError');
+
+        return null;
     }
 }
