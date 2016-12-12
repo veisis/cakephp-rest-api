@@ -16,12 +16,12 @@ class ApiController extends AppController
      * Before render callback.
      *
      * @param Event $event The beforeRender event.
-     * @return void
+     * @return \Cake\Network\Response|null
      */
     public function beforeRender(Event $event)
     {
         $this->viewBuilder()->className('RestApi.Api');
 
-        parent::beforeRender($event);
+        return parent::beforeRender($event);
     }
 }
