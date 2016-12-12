@@ -13,7 +13,7 @@
 
     <!-- Add any additional test suites you want to run here -->
     <testsuites>
-        <testsuite name="RestApi Test Suite">
+        <testsuite name="RestApi Plugin Test Suite">
             <directory>./tests/TestCase</directory>
         </testsuite>
     </testsuites>
@@ -33,10 +33,7 @@
     <filter>
         <blacklist>
             <directory suffix=".php">./vendor/</directory>
-            <directory suffix=".ctp">./vendor/</directory>
-
             <directory suffix=".php">./tests/</directory>
-            <directory suffix=".ctp">./tests/</directory>
         </blacklist>
     </filter>
 
