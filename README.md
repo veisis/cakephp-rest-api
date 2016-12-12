@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/multidots/cakephp-rest-api.svg?branch=master)](https://travis-ci.org/multidots/cakephp-rest-api)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/multidots/cakephp-rest-api/master/LICENSE)
+[![codecov](https://codecov.io/gh/multidots/cakephp-rest-api/branch/master/graph/badge.svg)](https://codecov.io/gh/multidots/cakephp-rest-api)
 [![Total Downloads](https://poser.pugx.org/multidots/cakephp-rest-api/downloads)](https://packagist.org/packages/multidots/cakephp-rest-api)
 [![Latest Stable Version](https://poser.pugx.org/multidots/cakephp-rest-api/v/stable)](https://packagist.org/packages/multidots/cakephp-rest-api)
 
