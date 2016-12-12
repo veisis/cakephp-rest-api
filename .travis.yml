@@ -11,9 +11,15 @@ env:
   global:
     - DEFAULT=1
     - PHPCS=1
+    - CODECOVERAGE=0
+
 
 matrix:
   fast_finish: true
+
+  include:
+    - php: 7.0
+      env: CODECOVERAGE=1 DEFAULT=0
 
 install:
   - composer self-update
