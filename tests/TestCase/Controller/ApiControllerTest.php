@@ -42,4 +42,17 @@ class ApiControllerTest extends IntegrationTestCase
         $viewClass = $this->controller->viewBuilder()->className();
         $this->assertEquals('RestApi.Api', $viewClass);
     }
+
+    /**
+     * Test response data
+     *
+     * @return void
+     */
+    public function testResponseData()
+    {
+        $this->controller->beforeRender(new Event('Controller.beforeRender'));
+
+        $this->assertNotEmpty($this->controller->httpStatusCode);
+        $this->assertContains($this->controller->responseStatus, ['OK', 'NOK']);
+    }
 }
