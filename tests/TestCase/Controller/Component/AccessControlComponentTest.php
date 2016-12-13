@@ -83,4 +83,17 @@ class AccessControlComponentTest extends TestCase
         $event = new Event('Controller.startup', $this->controller);
         $this->assertEquals($this->AccessControlComponent->startup($event), true);
     }
+
+    public function testPublicAction()
+    {
+        $config = [
+            'jwtAuth' => [
+                'enabled' => false
+            ]
+        ];
+        Configure::write('ApiRequest', $config);
+
+        $event = new Event('Controller.startup', $this->controller);
+        $this->assertEquals($this->AccessControlComponent->startup($event), true);
+    }
 }

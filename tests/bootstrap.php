@@ -7,6 +7,7 @@ use Cake\Cache\Cache;
 use Cake\Core\ClassLoader;
 use Cake\Core\Configure;
 use Cake\Datasource\ConnectionManager;
+use Cake\Routing\DispatcherFactory;
 
 require_once 'vendor/autoload.php';
 
@@ -84,3 +85,6 @@ $config = [
 ];
 
 ConnectionManager::config('test', $config);
+
+DispatcherFactory::add('Routing');
+DispatcherFactory::add('ControllerFactory');

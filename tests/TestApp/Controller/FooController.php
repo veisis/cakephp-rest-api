@@ -20,4 +20,14 @@ class FooController extends ApiController
     {
         $this->apiResponse['foo'] = 'bar';
     }
+
+    /**
+     * publicAction method
+     *
+     * @return Response|null
+     */
+    public function publicAction()
+    {
+        $this->apiResponse['foo'] = 'bar';
+    }
 }
