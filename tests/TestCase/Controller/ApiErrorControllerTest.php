@@ -54,6 +54,7 @@ class ApiErrorControllerTest extends IntegrationTestCase
 
         $this->assertNotEmpty($this->controller->httpStatusCode);
         $this->assertNotEmpty($this->controller->apiResponse['message']);
-        $this->assertContains($this->controller->responseStatus, ['OK', 'NOK']);
+        $this->assertNotEmpty($this->controller->responseStatus);
+        $this->assertEquals('NOK', $this->controller->responseStatus);
     }
 }

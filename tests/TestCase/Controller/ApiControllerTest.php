@@ -53,6 +53,7 @@ class ApiControllerTest extends IntegrationTestCase
         $this->controller->beforeRender(new Event('Controller.beforeRender'));
 
         $this->assertNotEmpty($this->controller->httpStatusCode);
+        $this->assertNotEmpty($this->controller->responseStatus);
         $this->assertContains($this->controller->responseStatus, ['OK', 'NOK']);
     }
 }
