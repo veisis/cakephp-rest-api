@@ -56,4 +56,11 @@ class ApiControllerTest extends IntegrationTestCase
         $this->assertNotEmpty($this->controller->responseStatus);
         $this->assertContains($this->controller->responseStatus, ['OK', 'NOK']);
     }
+
+    public function testFooAction()
+    {
+        /* it should call test/foo endpoint from TestApp/FooController
+         * and match the resulting json response
+         */
+    }
 }
