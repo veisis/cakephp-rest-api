@@ -70,5 +70,7 @@ class ApiControllerTest extends IntegrationTestCase
         /* it should call foo/public-action endpoint from TestApp/FooController
          * and match the resulting json response
          */
+//        $this->get('/test_app/foo/public-action');
+//        debug($this->get('/foo/public-action'));
     }
 }
