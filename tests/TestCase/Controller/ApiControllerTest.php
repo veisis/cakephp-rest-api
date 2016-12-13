@@ -5,6 +5,8 @@ namespace RestApi\Test\TestCase\Controller;
 use Cake\Event\Event;
 use Cake\Network\Request;
 use Cake\Network\Response;
+use Cake\Routing\RouteBuilder;
+use Cake\Routing\Router;
 use Cake\TestSuite\IntegrationTestCase;
 
 /**
@@ -29,6 +31,12 @@ class ApiControllerTest extends IntegrationTestCase
             ->setConstructorArgs([$request, $response])
             ->setMethods(null)
             ->getMock();
+
+        Router::plugin('RestApi', function (RouteBuilder $routes) {
+            $routes->connect(
+                '/foo/public-action', ['plugin' => 'RestApi', 'controller' => 'Foo', 'action' => 'publicAction']
+            );
+        });
     }
 
     /**
@@ -59,7 +67,7 @@ class ApiControllerTest extends IntegrationTestCase
 
     public function testFooAction()
     {
-        /* it should call test/foo endpoint from TestApp/FooController
+        /* it should call foo/public-action endpoint from TestApp/FooController
          * and match the resulting json response
          */
     }

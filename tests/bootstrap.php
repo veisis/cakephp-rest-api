@@ -2,7 +2,6 @@
 
 // @codingStandardsIgnoreFile
 
-
 use Cake\Cache\Cache;
 use Cake\Core\ClassLoader;
 use Cake\Core\Configure;
