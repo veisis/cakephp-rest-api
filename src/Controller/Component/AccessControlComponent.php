@@ -31,8 +31,10 @@ class AccessControlComponent extends Component
     public function startup(Event $event)
     {
         if (Configure::read('ApiRequest.jwtAuth.enabled')) {
-            $this->_performTokenValidation($event);
+            return $this->_performTokenValidation($event);
         }
+
+        return true;
     }
 
     /**
