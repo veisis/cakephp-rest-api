@@ -9,6 +9,7 @@ Router::defaultRouteClass(DashedRoute::class);
 
 Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/foo/public-action', ['controller' => 'Foo', 'action' => 'publicAction', 'allowWithoutToken' => true]);
+    $routes->connect('/foo/bar', ['controller' => 'Foo', 'action' => 'bar', 'allowWithoutToken' => true]);
     $routes->fallbacks(DashedRoute::class);
 });
 

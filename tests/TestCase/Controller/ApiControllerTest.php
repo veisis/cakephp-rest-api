@@ -31,12 +31,6 @@ class ApiControllerTest extends IntegrationTestCase
             ->setConstructorArgs([$request, $response])
             ->setMethods(null)
             ->getMock();
-
-        Router::plugin('RestApi', function (RouteBuilder $routes) {
-            $routes->connect(
-                '/foo/public-action', ['plugin' => 'RestApi', 'controller' => 'Foo', 'action' => 'publicAction']
-            );
-        });
     }
 
     /**
@@ -70,7 +64,10 @@ class ApiControllerTest extends IntegrationTestCase
         /* it should call foo/public-action endpoint from TestApp/FooController
          * and match the resulting json response
          */
-//        $this->get('/test_app/foo/public-action');
-//        debug($this->get('/foo/public-action'));
+        $request = new Request('/foo/bar');
+        $response = new Response();
+        $Controller = new \TestApp\Controller\FooController($request, $response);
+        $Controller->render();
+        debug($Controller->response->body());
     }
 }

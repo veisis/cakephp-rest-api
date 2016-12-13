@@ -99,4 +99,4 @@ $config = [
 
 ConnectionManager::config('test', $config);
 
-Plugin::load('RestApi', ['path' => ROOT . DS, 'autoload' => true]);
+Plugin::load('RestApi', ['path' => ROOT . DS, 'autoload' => true, 'bootstrap' => true]);
