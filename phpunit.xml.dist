@@ -5,7 +5,7 @@
     stopOnFailure="false"
     syntaxCheck="false"
     bootstrap="./tests/bootstrap.php"
-    >
+>
     <php>
         <ini name="memory_limit" value="-1"/>
         <ini name="apc.enable_cli" value="1"/>
@@ -21,8 +21,8 @@
     <!-- Setup a listener for fixtures -->
     <listeners>
         <listener
-        class="\Cake\TestSuite\Fixture\FixtureInjector"
-        file="./vendor/cakephp/cakephp/src/TestSuite/Fixture/FixtureInjector.php">
+            class="\Cake\TestSuite\Fixture\FixtureInjector"
+            file="./vendor/cakephp/cakephp/src/TestSuite/Fixture/FixtureInjector.php">
             <arguments>
                 <object class="\Cake\TestSuite\Fixture\FixtureManager" />
             </arguments>
@@ -31,6 +31,9 @@
 
     <!-- Prevent coverage reports from looking in tests and vendors -->
     <filter>
+        <whitelist>
+            <directory suffix=".php">./src/</directory>
+        </whitelist>
         <blacklist>
             <directory suffix=".php">./vendor/</directory>
             <directory suffix=".php">./tests/</directory>
