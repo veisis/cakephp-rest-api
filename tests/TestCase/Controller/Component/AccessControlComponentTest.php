@@ -96,4 +96,174 @@ class AccessControlComponentTest extends TestCase
         $event = new Event('Controller.startup', $this->controller);
         $this->assertEquals($this->AccessControlComponent->startup($event), true);
     }
+
+    public function testAccessToken()
+    {
+        $config = [
+            'jwtAuth' => [
+                'enabled' => true
+            ]
+        ];
+        Configure::write('ApiRequest', $config);
+
+        $request = new Request();
+        $request->params['allowWithoutToken'] = true;
+        $Controller = new \TestApp\Controller\FooController($request);
+        $registry = new ComponentRegistry($Controller);
+        $Component = new AccessControlComponent($registry);
+        $event = new Event('Controller.startup', $Controller);
+        $this->assertEquals($Component->startup($event), true);
+        unset($Controller);
+        unset($Component);
+    }
+
+    public function testAccessTokenInQuery()
+    {
+        $config = [
+            'jwtAuth' => [
+                'enabled' => true,
+                'cypherKey' => 'R1a#2%dY2fX@3g8r5&s4Kf6*sd(5dHs!5gD4s',
+                'tokenAlgorithm' => 'HS256'
+            ]
+        ];
+        Configure::write('ApiRequest', $config);
+
+        $payload = [
+            'id' => 1,
+            'email' => 'foo@example.com'
+        ];
+        $token = \RestApi\Utility\JwtToken::generateToken($payload);
+        $requestConfig = [
+            'params' => ['allowWithoutToken' => false],
+            'query' => ['token' => $token]
+        ];
+        $request = new Request($requestConfig);
+
+        $Controller = new \TestApp\Controller\FooController($request);
+        $registry = new ComponentRegistry($Controller);
+        $Component = new AccessControlComponent($registry);
+        $event = new Event('Controller.startup', $Controller);
+        $this->assertEquals($Component->startup($event), true);
+        unset($Controller);
+        unset($Component);
+    }
+
+    public function testAccessTokenInPost()
+    {
+        $config = [
+            'jwtAuth' => [
+                'enabled' => true,
+                'cypherKey' => 'R1a#2%dY2fX@3g8r5&s4Kf6*sd(5dHs!5gD4s',
+                'tokenAlgorithm' => 'HS256'
+            ]
+        ];
+        Configure::write('ApiRequest', $config);
+
+        $payload = [
+            'id' => 1,
+            'email' => 'foo@example.com'
+        ];
+        $token = \RestApi\Utility\JwtToken::generateToken($payload);
+        $requestConfig = [
+            'params' => ['allowWithoutToken' => false],
+            'post' => ['token' => $token]
+        ];
+        $request = new Request($requestConfig);
+
+        $Controller = new \TestApp\Controller\FooController($request);
+        $registry = new ComponentRegistry($Controller);
+        $Component = new AccessControlComponent($registry);
+        $event = new Event('Controller.startup', $Controller);
+        $this->assertEquals($Component->startup($event), true);
+        unset($Controller);
+        unset($Component);
+    }
+
+    public function testAccessTokenInHeader()
+    {
+        $config = [
+            'jwtAuth' => [
+                'enabled' => true,
+                'cypherKey' => 'R1a#2%dY2fX@3g8r5&s4Kf6*sd(5dHs!5gD4s',
+                'tokenAlgorithm' => 'HS256'
+            ]
+        ];
+        Configure::write('ApiRequest', $config);
+
+        $payload = [
+            'id' => 1,
+            'email' => 'foo@example.com'
+        ];
+        $token = \RestApi\Utility\JwtToken::generateToken($payload);
+        $requestConfig = [
+            'params' => ['allowWithoutToken' => false]
+        ];
+        $request = new Request($requestConfig);
+        $request->env('HTTP_AUTHORIZATION', "Bearer {$token}");
+        $Controller = new \TestApp\Controller\FooController($request);
+        $registry = new ComponentRegistry($Controller);
+        $Component = new AccessControlComponent($registry);
+        $event = new Event('Controller.startup', $Controller);
+        $this->assertEquals($Component->startup($event), true);
+        unset($Controller);
+        unset($Component);
+    }
+
+    public function testAccessTokenFormat()
+    {
+        $config = [
+            'jwtAuth' => [
+                'enabled' => true,
+                'cypherKey' => 'R1a#2%dY2fX@3g8r5&s4Kf6*sd(5dHs!5gD4s',
+                'tokenAlgorithm' => 'HS256'
+            ]
+        ];
+        Configure::write('ApiRequest', $config);
+
+        $this->setExpectedException('RestApi\Routing\Exception\InvalidTokenException');
+
+        $token = 'invalid token format';
+        $requestConfig = [
+            'params' => ['allowWithoutToken' => false],
+            'query' => ['token' => $token]
+        ];
+        $request = new Request($requestConfig);
+
+        $Controller = new \TestApp\Controller\FooController($request);
+        $registry = new ComponentRegistry($Controller);
+        $Component = new AccessControlComponent($registry);
+        $event = new Event('Controller.startup', $Controller);
+        $Component->startup($event);
+
+        unset($Controller);
+        unset($Component);
+    }
+
+    public function testMissingAccessToken()
+    {
+        $config = [
+            'jwtAuth' => [
+                'enabled' => true,
+                'cypherKey' => 'R1a#2%dY2fX@3g8r5&s4Kf6*sd(5dHs!5gD4s',
+                'tokenAlgorithm' => 'HS256'
+            ]
+        ];
+        Configure::write('ApiRequest', $config);
+
+        $this->setExpectedException('RestApi\Routing\Exception\MissingTokenException');
+
+        $requestConfig = [
+            'params' => ['allowWithoutToken' => false]
+        ];
+        $request = new Request($requestConfig);
+
+        $Controller = new \TestApp\Controller\FooController($request);
+        $registry = new ComponentRegistry($Controller);
+        $Component = new AccessControlComponent($registry);
+        $event = new Event('Controller.startup', $Controller);
+        $Component->startup($event);
+
+        unset($Controller);
+        unset($Component);
+    }
 }
