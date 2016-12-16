@@ -202,7 +202,10 @@ CREATE TABLE IF NOT EXISTS `api_requests` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
-
+Or you can use the `bake` command to automatically generate the above table.
+```sh
+$ bin/cake migrations migrate --plugin RestApi
+```
 ## Response format
 The default response format of API is `json` and its structure is defined as below.
 ```json
