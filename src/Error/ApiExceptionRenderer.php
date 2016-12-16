@@ -81,15 +81,16 @@ class ApiExceptionRenderer extends ExceptionRenderer
 
         Configure::write('apiExceptionMessage', $exception->getMessage());
 
+        $responseFormat = $this->_getController()->responseFormat;
         $body = [
-            'status' => !empty($options['responseStatus']) ? $options['responseStatus'] : 'NOK',
-            'result' => [
-                'error' => ($code < 500) ? 'Not Found' : 'An Internal Error Has Occurred.',
+            $responseFormat['statusKey'] => !empty($options['responseStatus']) ? $options['responseStatus'] : $responseFormat['statusNokText'],
+            $responseFormat['resultKey'] => [
+                $responseFormat['errorKey'] => ($code < 500) ? 'Not Found' : 'An Internal Error Has Occurred.',
             ],
         ];
 
         if (isset($options['customMessage']) && $options['customMessage']) {
-            $body['result']['error'] = $exception->getMessage();
+            $body[$responseFormat['resultKey']][$responseFormat['errorKey']] = $exception->getMessage();
         }
 
         $response->type('json');

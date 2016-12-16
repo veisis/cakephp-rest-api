@@ -1,8 +1,8 @@
 <?php
 
-if (empty($response['result'])) {
-    $response['result'] = [
-        'message' => 'Empty response!'
+if (empty($response[$responseFormat['resultKey']])) {
+    $response[$responseFormat['resultKey']] = [
+        $responseFormat['messageKey'] => $responseFormat['defaultMessageText']
     ];
 }
 

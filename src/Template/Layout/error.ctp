@@ -1,7 +1,8 @@
 <?php
-if (empty($response['result'])) {
-    $response['result'] = [
-        'error' => 'Unknown request!'
+
+if (empty($response[$responseFormat['resultKey']])) {
+    $response[$responseFormat['resultKey']] = [
+        $responseFormat['errorKey'] => $responseFormat['defaultErrorText']
     ];
 }
 

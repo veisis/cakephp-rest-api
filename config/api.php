@@ -8,7 +8,9 @@ return [
             'statusNokText' => 'NOK',
             'resultKey' => 'result',
             'messageKey' => 'message',
-            'errorKey' => 'error'
+            'defaultMessageText' => 'Empty response!',
+            'errorKey' => 'error',
+            'defaultErrorText' => 'Unknown request!'
         ],
         'log' => false,
         'jwtAuth' => [

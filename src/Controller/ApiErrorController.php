@@ -24,7 +24,7 @@ class ApiErrorController extends AppController
 
         $messageArr = $this->response->httpCodes($this->httpStatusCode);
 
-        $this->apiResponse['message'] = !empty($messageArr[$this->httpStatusCode]) ? $messageArr[$this->httpStatusCode] : 'Unknown error!';
+        $this->apiResponse[$this->responseFormat['messageKey']] = !empty($messageArr[$this->httpStatusCode]) ? $messageArr[$this->httpStatusCode] : 'Unknown error!';
 
         parent::beforeRender($event);
 
