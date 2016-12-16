@@ -66,13 +66,23 @@ The URL for above example will be `http://yourdomain.com/foo/bar`. You can custo
 Simple :)
 
 ## Configurations
-This plugin provides several configuration related to `CORS` , Request Logging and `JWT` authentication. The default configurations are as below and defined in `RestApi/config/api.php`.
+This plugin provides several configuration related to Response Format, `CORS` , Request Logging and `JWT` authentication. The default configurations are as below and defined in `RestApi/config/api.php`.
 ```php
 <?php
 
 return [
     'ApiRequest' => [
-	    'log' => false,
+    	'responseFormat' => [
+            'statusKey' => 'status',
+            'statusOkText' => 'OK',
+            'statusNokText' => 'NOK',
+            'resultKey' => 'result',
+            'messageKey' => 'message',
+            'defaultMessageText' => 'Empty response!',
+            'errorKey' => 'error',
+            'defaultErrorText' => 'Unknown request!'
+        ],
+        'log' => false,
         'jwtAuth' => [
             'enabled' => true,
             'cypherKey' => 'R1a#2%dY2fX@3g8r5&s4Kf6*sd(5dHs!5gD4s',
@@ -144,7 +154,7 @@ class AccountController extends ApiController
 ```
 
 ### cors
-By default, cors requests are enabled and allowed from all domains. You can overwrite these settings by creating config file at `APP/config/api.php` . The content of file will look like,
+By default, cors requests are enabled and allowed from all domains. You can overwrite these settings by creating config file at `APP/config/api.php`. The content of file will look like,
 ```php
 <?php
 return [
@@ -217,6 +227,8 @@ The default response format of API is `json` and its structure is defined as bel
 }
 ```
 If you have set httpResponseCode to any value other that 200, the `status` value will be `NOK` otherwise `OK`. In case of exceptions, it will be handled automatically and set the appropriate status code.
+> You can modify the default response configuration like the text for OK response, key for main response data, etc. by overwriting them  in your `APP/config/api.php` file.
+
 ## Examples
 Below are few examples to understand how this plugin works.
 
