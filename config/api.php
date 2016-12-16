@@ -2,6 +2,14 @@
 
 return [
     'ApiRequest' => [
+        'responseFormat' => [
+            'statusKey' => 'status',
+            'statusOkText' => 'OK',
+            'statusNokText' => 'NOK',
+            'resultKey' => 'result',
+            'messageKey' => 'message',
+            'errorKey' => 'error'
+        ],
         'log' => false,
         'jwtAuth' => [
             'enabled' => true,
