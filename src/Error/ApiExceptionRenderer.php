@@ -89,7 +89,7 @@ class ApiExceptionRenderer extends ExceptionRenderer
             ],
         ];
 
-        if (isset($options['customMessage']) && $options['customMessage']) {
+        if ((isset($options['customMessage']) && $options['customMessage']) || Configure::read('ApiRequest.debug')) {
             $body[$responseFormat['resultKey']][$responseFormat['errorKey']] = $exception->getMessage();
         }
 

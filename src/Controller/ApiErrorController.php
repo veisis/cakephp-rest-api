@@ -2,6 +2,7 @@
 
 namespace RestApi\Controller;
 
+use Cake\Core\Configure;
 use Cake\Event\Event;
 
 /**
@@ -24,7 +25,11 @@ class ApiErrorController extends AppController
 
         $messageArr = $this->response->httpCodes($this->httpStatusCode);
 
-        $this->apiResponse[$this->responseFormat['messageKey']] = !empty($messageArr[$this->httpStatusCode]) ? $messageArr[$this->httpStatusCode] : 'Unknown error!';
+        if (Configure::read('ApiRequest.debug') && isset($this->viewVars['error'])) {
+            $this->apiResponse[$this->responseFormat['messageKey']] = $this->viewVars['error']->getMessage();
+        } else {
+            $this->apiResponse[$this->responseFormat['messageKey']] = !empty($messageArr[$this->httpStatusCode]) ? $messageArr[$this->httpStatusCode] : 'Unknown error!';
+        }
 
         parent::beforeRender($event);
 

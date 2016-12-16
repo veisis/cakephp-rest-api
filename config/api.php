@@ -2,6 +2,7 @@
 
 return [
     'ApiRequest' => [
+        'debug' => false,
         'responseFormat' => [
             'statusKey' => 'status',
             'statusOkText' => 'OK',
