@@ -72,6 +72,7 @@ This plugin provides several configuration related to Response Format, `CORS` , 
 
 return [
     'ApiRequest' => [
+        'debug' => false,
     	'responseFormat' => [
             'statusKey' => 'status',
             'statusOkText' => 'OK',
@@ -98,6 +99,7 @@ return [
     ]
 ];
 ```
+> Set `debug` to true in your development environment to get original exception messages in response.
 
 ### Request authentication using JWT
 You can check for presence of auth token in API request. By default it is enabled. You need to define a flag `allowWithoutToken` to `true` or `false`. For example,
