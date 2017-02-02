@@ -1,9 +1,5 @@
 <?php
 
-if (empty($response[$responseFormat['resultKey']])) {
-    $response[$responseFormat['resultKey']] = [
-        $responseFormat['messageKey'] => $responseFormat['defaultMessageText']
-    ];
-}
+echo $this->element('RestApi.response_default');
 
 echo json_encode($response);

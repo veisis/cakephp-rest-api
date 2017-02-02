@@ -1,9 +1,5 @@
 <?php
 
-if (empty($response[$responseFormat['resultKey']])) {
-    $response[$responseFormat['resultKey']] = [
-        $responseFormat['errorKey'] => $responseFormat['defaultErrorText']
-    ];
-}
+echo $this->element('RestApi.error_default');
 
 echo json_encode($response);

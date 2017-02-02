@@ -5,6 +5,7 @@ namespace RestApi\Error;
 use Cake\Core\Configure;
 use Cake\Error\ExceptionRenderer;
 use Cake\Network\Response;
+use Cake\Utility\Xml;
 use Exception;
 use RestApi\Controller\ApiErrorController;
 use RestApi\Routing\Exception\InvalidTokenException;
@@ -93,8 +94,13 @@ class ApiExceptionRenderer extends ExceptionRenderer
             $body[$responseFormat['resultKey']][$responseFormat['errorKey']] = $exception->getMessage();
         }
 
-        $response->type('json');
-        $response->body(json_encode($body));
+        if ('xml' === Configure::read('ApiRequest.responseType')) {
+            $response->type('xml');
+            $response->body(Xml::fromArray([Configure::read('ApiRequest.xmlResponseRootNode') => $body], 'tags')->asXML());
+        } else {
+            $response->type('json');
+            $response->body(json_encode($body));
+        }
 
         return $response;
     }

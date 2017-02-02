@@ -3,6 +3,8 @@
 return [
     'ApiRequest' => [
         'debug' => false,
+        'responseType' => 'json',
+        'xmlResponseRootNode' => 'response',
         'responseFormat' => [
             'statusKey' => 'status',
             'statusOkText' => 'OK',

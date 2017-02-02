@@ -14,6 +14,13 @@ class ApiErrorView extends View
 {
 
     /**
+     * Layout
+     *
+     * @var string
+     */
+    protected $_responseLayout = 'error';
+
+    /**
      * Initialization hook method.
      *
      * @return void
@@ -22,7 +29,12 @@ class ApiErrorView extends View
     {
         parent::initialize();
 
-        $this->response->type('json');
+        if ('xml' === Configure::read('ApiRequest.responseType')) {
+            $this->response->type('xml');
+            $this->_responseLayout = 'xml_error';
+        } else {
+            $this->response->type('json');
+        }
     }
 
     /**
@@ -39,7 +51,7 @@ class ApiErrorView extends View
             return null;
         }
 
-        $this->layout = 'RestApi.error';
+        $this->layout = "RestApi.{$this->_responseLayout}";
 
         $this->Blocks->set('content', $this->renderLayout('', $this->layout));
 
