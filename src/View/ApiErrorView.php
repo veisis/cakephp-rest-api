@@ -2,6 +2,7 @@
 
 namespace RestApi\View;
 
+use Cake\Core\Configure;
 use Cake\Core\Exception\Exception;
 use Cake\View\View;
 
