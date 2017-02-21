@@ -73,6 +73,8 @@ This plugin provides several configuration related to Response Format, `CORS` , 
 return [
     'ApiRequest' => [
         'debug' => false,
+        'responseType' => 'json',
+        'xmlResponseRootNode' => 'response',
     	'responseFormat' => [
             'statusKey' => 'status',
             'statusOkText' => 'OK',
@@ -99,7 +101,11 @@ return [
     ]
 ];
 ```
-> Set `debug` to true in your development environment to get original exception messages in response.
+### Debug
+Set `debug` to true in your development environment to get original exception messages in response.
+
+### Response format
+It supports `json` and `xml` formats. The default response format is `json`. Set `responseType` to change your response format. In case of `xml` format, you can set the root element name by `xmlResponseRootNode` parameter.
 
 ### Request authentication using JWT
 You can check for presence of auth token in API request. By default it is enabled. You need to define a flag `allowWithoutToken` to `true` or `false`. For example,
