@@ -151,12 +151,12 @@ class AccountController extends ApiController
         /**
          * process your data and validate it against database table
          */
-        
+
 		// generate token if valid user
 		$payload = ['email' => $user->email, 'name' => $user->name];
 
         $this->apiResponse['token'] = JwtToken::generateToken($payload);
-        $this->apiResponse['message'] = 'Logged in successfully.'; 
+        $this->apiResponse['message'] = 'Logged in successfully.';
     }
 }
 ```
@@ -213,6 +213,7 @@ CREATE TABLE IF NOT EXISTS `api_requests` (
   `ip_address` varchar(50) NOT NULL,
   `request_data` longtext,
   `response_code` int(5) NOT NULL,
+  `response_type` varchar(50) DEFAULT 'json',
   `response_data` longtext,
   `exception` longtext,
   `created` datetime NOT NULL,
@@ -290,7 +291,7 @@ The response of above API call will look like,
 }
 ```
 ### Exception handling
-This plugin will handle the exceptions being thrown from your action. For example, if you API method only allows `POST` method and someone makes a `GET` request, it will generate `NOK` response with proper HTTP response code. For example, 
+This plugin will handle the exceptions being thrown from your action. For example, if you API method only allows `POST` method and someone makes a `GET` request, it will generate `NOK` response with proper HTTP response code. For example,
 ```php
 <?php
 
