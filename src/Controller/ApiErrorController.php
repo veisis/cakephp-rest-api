@@ -31,6 +31,8 @@ class ApiErrorController extends AppController
             $this->apiResponse[$this->responseFormat['messageKey']] = !empty($messageArr[$this->httpStatusCode]) ? $messageArr[$this->httpStatusCode] : 'Unknown error!';
         }
 
+        Configure::write('apiExceptionMessage', isset($this->viewVars['error']) ? $this->viewVars['error']->getMessage() : null);
+
         parent::beforeRender($event);
 
         $this->viewBuilder()->className('RestApi.ApiError');
