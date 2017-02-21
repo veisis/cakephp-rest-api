@@ -32,6 +32,7 @@ class ApiRequestLogger
                 'ip_address' => $request->clientIp(),
                 'request_data' => json_encode($request->data),
                 'response_code' => $response->statusCode(),
+                'response_type' => Configure::read('ApiRequest.responseType'),
                 'response_data' => $response->body(),
                 'exception' => Configure::read('apiExceptionMessage'),
             ];
