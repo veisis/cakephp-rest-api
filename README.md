@@ -238,6 +238,17 @@ The default response format of API is `json` and its structure is defined as bel
 If you have set httpResponseCode to any value other that 200, the `status` value will be `NOK` otherwise `OK`. In case of exceptions, it will be handled automatically and set the appropriate status code.
 > You can modify the default response configuration like the text for OK response, key for main response data, etc. by overwriting them  in your `APP/config/api.php` file.
 
+In case of `xml` format, the response structure will look like,
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<response>
+    <status>1</status>
+    <result>
+        // your data
+    </result>
+</response>
+```
+
 ## Examples
 Below are few examples to understand how this plugin works.
 
