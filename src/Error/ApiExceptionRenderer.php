@@ -102,6 +102,8 @@ class ApiExceptionRenderer extends ExceptionRenderer
             $response->body(json_encode($body));
         }
 
+        $this->controller->response = $response;
+
         return $response;
     }
 }
