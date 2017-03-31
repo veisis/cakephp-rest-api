@@ -21,14 +21,14 @@ class AccessControlComponent extends Component
 {
 
     /**
-     * Startup method.
+     * beforeFilter method.
      *
      * Handles request authentication using JWT.
      *
      * @param Event $event The startup event
      * @return Response
      */
-    public function startup(Event $event)
+    public function beforeFilter(Event $event)
     {
         if (Configure::read('ApiRequest.jwtAuth.enabled')) {
             return $this->_performTokenValidation($event);
