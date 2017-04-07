@@ -55,11 +55,11 @@ class AccessControlComponentTest extends TestCase
     }
 
     /**
-     * Test startup method
+     * Test beforeFilter method
      *
      * @return void
      */
-    public function testStartup()
+    public function testBeforeFilter()
     {
         $config = [
             'log' => false,
@@ -80,8 +80,8 @@ class AccessControlComponentTest extends TestCase
 
         $this->setExpectedException('RestApi\Routing\Exception\MissingTokenException');
 
-        $event = new Event('Controller.startup', $this->controller);
-        $this->assertEquals($this->AccessControlComponent->startup($event), true);
+        $event = new Event('Controller.beforeFilter', $this->controller);
+        $this->assertEquals($this->AccessControlComponent->beforeFilter($event), true);
     }
 
     public function testPublicAction()
@@ -93,8 +93,8 @@ class AccessControlComponentTest extends TestCase
         ];
         Configure::write('ApiRequest', $config);
 
-        $event = new Event('Controller.startup', $this->controller);
-        $this->assertEquals($this->AccessControlComponent->startup($event), true);
+        $event = new Event('Controller.beforeFilter', $this->controller);
+        $this->assertEquals($this->AccessControlComponent->beforeFilter($event), true);
     }
 
     public function testAccessToken()
@@ -111,8 +111,8 @@ class AccessControlComponentTest extends TestCase
         $Controller = new \TestApp\Controller\FooController($request);
         $registry = new ComponentRegistry($Controller);
         $Component = new AccessControlComponent($registry);
-        $event = new Event('Controller.startup', $Controller);
-        $this->assertEquals($Component->startup($event), true);
+        $event = new Event('Controller.beforeFilter', $Controller);
+        $this->assertEquals($Component->beforeFilter($event), true);
         unset($Controller);
         unset($Component);
     }
@@ -142,8 +142,8 @@ class AccessControlComponentTest extends TestCase
         $Controller = new \TestApp\Controller\FooController($request);
         $registry = new ComponentRegistry($Controller);
         $Component = new AccessControlComponent($registry);
-        $event = new Event('Controller.startup', $Controller);
-        $this->assertEquals($Component->startup($event), true);
+        $event = new Event('Controller.beforeFilter', $Controller);
+        $this->assertEquals($Component->beforeFilter($event), true);
         unset($Controller);
         unset($Component);
     }
@@ -173,8 +173,8 @@ class AccessControlComponentTest extends TestCase
         $Controller = new \TestApp\Controller\FooController($request);
         $registry = new ComponentRegistry($Controller);
         $Component = new AccessControlComponent($registry);
-        $event = new Event('Controller.startup', $Controller);
-        $this->assertEquals($Component->startup($event), true);
+        $event = new Event('Controller.beforeFilter', $Controller);
+        $this->assertEquals($Component->beforeFilter($event), true);
         unset($Controller);
         unset($Component);
     }
@@ -203,8 +203,8 @@ class AccessControlComponentTest extends TestCase
         $Controller = new \TestApp\Controller\FooController($request);
         $registry = new ComponentRegistry($Controller);
         $Component = new AccessControlComponent($registry);
-        $event = new Event('Controller.startup', $Controller);
-        $this->assertEquals($Component->startup($event), true);
+        $event = new Event('Controller.beforeFilter', $Controller);
+        $this->assertEquals($Component->beforeFilter($event), true);
         unset($Controller);
         unset($Component);
     }
@@ -232,8 +232,8 @@ class AccessControlComponentTest extends TestCase
         $Controller = new \TestApp\Controller\FooController($request);
         $registry = new ComponentRegistry($Controller);
         $Component = new AccessControlComponent($registry);
-        $event = new Event('Controller.startup', $Controller);
-        $Component->startup($event);
+        $event = new Event('Controller.beforeFilter', $Controller);
+        $Component->beforeFilter($event);
 
         unset($Controller);
         unset($Component);
@@ -261,8 +261,8 @@ class AccessControlComponentTest extends TestCase
         $Controller = new \TestApp\Controller\FooController($request);
         $registry = new ComponentRegistry($Controller);
         $Component = new AccessControlComponent($registry);
-        $event = new Event('Controller.startup', $Controller);
-        $Component->startup($event);
+        $event = new Event('Controller.beforeFilter', $Controller);
+        $Component->beforeFilter($event);
 
         unset($Controller);
         unset($Component);
@@ -290,8 +290,8 @@ class AccessControlComponentTest extends TestCase
         $Controller = new \TestApp\Controller\FooController($request);
         $registry = new ComponentRegistry($Controller);
         $Component = new AccessControlComponent($registry);
-        $event = new Event('Controller.startup', $Controller);
-        $Component->startup($event);
+        $event = new Event('Controller.beforeFilter', $Controller);
+        $Component->beforeFilter($event);
 
         unset($Controller);
         unset($Component);
@@ -318,8 +318,8 @@ class AccessControlComponentTest extends TestCase
         $Controller = new \TestApp\Controller\FooController($request);
         $registry = new ComponentRegistry($Controller);
         $Component = new AccessControlComponent($registry);
-        $event = new Event('Controller.startup', $Controller);
-        $Component->startup($event);
+        $event = new Event('Controller.beforeFilter', $Controller);
+        $Component->beforeFilter($event);
 
         unset($Controller);
         unset($Component);
