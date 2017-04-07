@@ -55,11 +55,11 @@ class AccessControlComponentTest extends TestCase
     }
 
     /**
-     * Test startup method
+     * Test beforeFilter method
      *
      * @return void
      */
-    public function testStartup()
+    public function testBeforeFilter()
     {
         $config = [
             'log' => false,
