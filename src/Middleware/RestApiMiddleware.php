@@ -34,7 +34,7 @@ class RestApiMiddleware extends ErrorHandlerMiddleware
                     return $next($request, $response);
                 }
                 $type = 'Controller';
-                if(isset($params['prefix']) && $params['prefix']) {
+                if (isset($params['prefix']) && $params['prefix']) {
                     $prefix = Inflector::camelize($params['prefix']);
                     $type = 'Controller/'.$prefix;
                 }
