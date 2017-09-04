@@ -78,7 +78,7 @@ class AccessControlComponentTest extends TestCase
         ];
         Configure::write('ApiRequest', $config);
 
-        $this->setExpectedException('RestApi\Routing\Exception\MissingTokenException');
+        $this->expectException('RestApi\Routing\Exception\MissingTokenException');
 
         $event = new Event('Controller.beforeFilter', $this->controller);
         $this->assertEquals($this->AccessControlComponent->beforeFilter($event), true);
@@ -220,7 +220,7 @@ class AccessControlComponentTest extends TestCase
         ];
         Configure::write('ApiRequest', $config);
 
-        $this->setExpectedException('RestApi\Routing\Exception\InvalidTokenException');
+        $this->expectException('RestApi\Routing\Exception\InvalidTokenException');
 
         $token = 'invalid token format';
         $requestConfig = [
@@ -250,7 +250,7 @@ class AccessControlComponentTest extends TestCase
         ];
         Configure::write('ApiRequest', $config);
 
-        $this->setExpectedException('RestApi\Routing\Exception\InvalidTokenFormatException');
+        $this->expectException('RestApi\Routing\Exception\InvalidTokenFormatException');
 
         $requestConfig = [
             'params' => ['allowWithoutToken' => false]
@@ -279,7 +279,7 @@ class AccessControlComponentTest extends TestCase
         ];
         Configure::write('ApiRequest', $config);
 
-        $this->setExpectedException('RestApi\Routing\Exception\InvalidTokenException');
+        $this->expectException('RestApi\Routing\Exception\InvalidTokenException');
 
         $requestConfig = [
             'params' => ['allowWithoutToken' => false]
@@ -308,7 +308,7 @@ class AccessControlComponentTest extends TestCase
         ];
         Configure::write('ApiRequest', $config);
 
-        $this->setExpectedException('RestApi\Routing\Exception\MissingTokenException');
+        $this->expectException('RestApi\Routing\Exception\MissingTokenException');
 
         $requestConfig = [
             'params' => ['allowWithoutToken' => false]
