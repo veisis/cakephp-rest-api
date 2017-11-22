@@ -40,7 +40,7 @@ class RestApiMiddleware extends ErrorHandlerMiddleware
                 }
                 $className = App::className($controllerName, $type, 'Controller');
                 $controller = ($className) ? new $className() : null;
-                if ($controller && 'RestApi\Controller\ApiController' === get_parent_class($controller)) {
+                if( $controller && is_a($controller, 'RestApi\Controller\ApiController', TRUE)) {
                     if (isset($this->renderer)) {
                         $this->renderer = 'RestApi\Error\ApiExceptionRenderer';
                     } else {
