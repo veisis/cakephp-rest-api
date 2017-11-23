@@ -89,7 +89,7 @@ class ApiRequestHandler implements EventListenerInterface
                 $logOnlyErrorCodes = Configure::read('ApiRequest.logOnlyErrorCodes');
                 if (empty($logOnlyErrorCodes) && $responseCode !== 200) {
                     ApiRequestLogger::log($request, $event->subject()->response);
-                } else if (in_array($responseCode, $logOnlyErrorCodes)) {
+                } elseif (in_array($responseCode, $logOnlyErrorCodes)) {
                     ApiRequestLogger::log($request, $event->subject()->response);
                 }
             } else {
