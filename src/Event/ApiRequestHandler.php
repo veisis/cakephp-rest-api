@@ -84,7 +84,17 @@ class ApiRequestHandler implements EventListenerInterface
         }
 
         if (!Configure::read('requestLogged') && Configure::read('ApiRequest.log')) {
-            ApiRequestLogger::log($request, $event->subject()->response);
+            if (Configure::read('ApiRequest.logOnlyErrors')) {
+                $responseCode = $event->subject()->httpStatusCode;
+                $logOnlyErrorCodes = Configure::read('ApiRequest.logOnlyErrorCodes');
+                if (empty($logOnlyErrorCodes) && $responseCode !== 200) {
+                    ApiRequestLogger::log($request, $event->subject()->response);
+                } else if (in_array($responseCode, $logOnlyErrorCodes)) {
+                    ApiRequestLogger::log($request, $event->subject()->response);
+                }
+            } else {
+                ApiRequestLogger::log($request, $event->subject()->response);
+            }
         }
     }
 
