@@ -86,6 +86,8 @@ return [
             'defaultErrorText' => 'Unknown request!'
         ],
         'log' => false,
+	'logOnlyErrors' => true,
+        'logOnlyErrorCodes' => [404, 500],
         'jwtAuth' => [
             'enabled' => true,
             'cypherKey' => 'R1a#2%dY2fX@3g8r5&s4Kf6*sd(5dHs!5gD4s',
@@ -225,6 +227,19 @@ Or you can use the `bake` command to automatically generate the above table.
 ```sh
 $ bin/cake migrations migrate --plugin RestApi
 ```
+
+#### Log only error responses
+Sometimes, it is not necessary to log each and every request and response. We just want to log the request and response in case of error only. For that, you can set the additional settings using `logOnlyErrors` option.
+
+```php
+'logOnlyErrors' => true, // it will log only errors
+'logOnlyErrorCodes' => [404, 500], // Specify the response codes to consider
+```
+
+> If the `logOnlyErrors` is set, this will only log the request and response which are not equals to 200 OK.
+> You can specify to log the request for only specific response code. You can specify the response codes in `logOnlyErrorCodes` option in array format.
+> This will only work if the `log` option is set to `true`
+
 ## Response format
 The default response format of API is `json` and its structure is defined as below.
 ```json
