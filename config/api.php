@@ -15,7 +15,7 @@ return [
             'errorKey' => 'error',
             'defaultErrorText' => 'Unknown request!'
         ],
-        'log' => true,
+        'log' => false,
         'logOnlyErrors' => true,
         'logOnlyErrorCodes' => [404, 500],
         'jwtAuth' => [
