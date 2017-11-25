@@ -47,13 +47,13 @@ class FooController extends ApiController
      */
     public function bar()
     {
-		// your action logic
+	// your action logic
 
-		// Set the HTTP status code. By default, it is set to 200
-		$this->httpStatusCode = 200;
+	// Set the HTTP status code. By default, it is set to 200
+	$this->httpStatusCode = 200;
 
-		// Set the response
-		$this->apiResponse['you_response'] = 'your response data';
+	// Set the response
+        $this->apiResponse['you_response'] = 'your response data';
     }
 }
 ```
@@ -154,8 +154,8 @@ class AccountController extends ApiController
          * process your data and validate it against database table
          */
 
-		// generate token if valid user
-		$payload = ['email' => $user->email, 'name' => $user->name];
+	// generate token if valid user
+	$payload = ['email' => $user->email, 'name' => $user->name];
 
         $this->apiResponse['token'] = JwtToken::generateToken($payload);
         $this->apiResponse['message'] = 'Logged in successfully.';
