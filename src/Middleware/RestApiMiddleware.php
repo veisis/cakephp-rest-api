@@ -3,6 +3,7 @@
 namespace RestApi\Middleware;
 
 use Cake\Core\App;
+use Cake\Core\Configure;
 use Cake\Error\Middleware\ErrorHandlerMiddleware;
 use Cake\Event\EventManager;
 use Cake\Utility\Inflector;
@@ -41,10 +42,11 @@ class RestApiMiddleware extends ErrorHandlerMiddleware
                 $className = App::className($controllerName, $type, 'Controller');
                 $controller = ($className) ? new $className() : null;
                 if ($controller && is_subclass_of($controller, 'RestApi\Controller\ApiController')) {
-                    if (isset($this->renderer)) {
-                        $this->renderer = 'RestApi\Error\ApiExceptionRenderer';
+                    $renderer = Configure::read('ApiRequest.exceptionRenderer');
+                	if (isset($this->renderer)) {
+                        $this->renderer = ($renderer) ? $renderer : 'RestApi\Error\ApiExceptionRenderer';
                     } else {
-                        $this->exceptionRenderer = 'RestApi\Error\ApiExceptionRenderer';
+                        $this->exceptionRenderer = ($renderer) ? $renderer : 'RestApi\Error\ApiExceptionRenderer';
                     }
                     EventManager::instance()->on(new ApiRequestHandler());
                 }
