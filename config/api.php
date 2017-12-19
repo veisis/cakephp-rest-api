@@ -18,6 +18,7 @@ return [
         'log' => false,
         'logOnlyErrors' => true,
         'logOnlyErrorCodes' => [404, 500],
+        'exceptionRenderer' => 'RestApi\Error\ApiExceptionRenderer',
         'jwtAuth' => [
             'enabled' => false,
             'cypherKey' => 'R1a#2%dY2fX@3g8r5&s4Kf6*sd(5dHs!5gD4s',
