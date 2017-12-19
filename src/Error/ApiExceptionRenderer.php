@@ -74,7 +74,7 @@ class ApiExceptionRenderer extends ExceptionRenderer
      *
      * @return Response
      */
-    private function __prepareResponse($exception, $options = [])
+    protected function __prepareResponse($exception, $options = [])
     {
         $response = $this->_getController()->response;
         $code = $this->_code($exception);
